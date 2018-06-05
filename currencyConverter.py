@@ -18,8 +18,9 @@ import os
 import urllib
 import json
 from collections import namedtuple
-baseURL="https://v3.exchangerate-api.com/bulk"
-yourAPIKey="a829f18d02e0e79bb9342658"
+import time
+baseURL="http://apilayer.net/api/"
+yourAPIKey="9481be930c0a6e0c5129c1c03b632cd3"
 baseCurrency=""
 
 
@@ -39,31 +40,74 @@ input_curr_val=float(input_values[1]);
 print ("ENTER THE DESIRED OUTPUT CURRENCY TYPES SEPARATED BY SPACES: \n");
 output_args=raw_input();
 output_curr_types=output_args.split(" ");
+maxHistory=4
+history=[]
 
-URL=baseURL+"/"+yourAPIKey+"/"+(input_curr_type.upper())
 
 
 #2. Getting real-time rates 
-def getRealTimeRates(URL):
+def getLiveRates():
+    liveRatesURL=baseURL+'live' 
+    currencies= ','.join(output_curr_types) 
+    params={'access_key': yourAPIKey, 'currencies': currencies, 'format': 1}
+    r = requests.get(liveRatesURL, params = params)
+    livequote=r.json()  
+    SOURCE=livequote["source"]
+    STATUS=livequote["success"]
+    TIMESTAMP=livequote["timestamp"]
+    LASTCHANGED=time.ctime(TIMESTAMP)
+    QUOTES=livequote["quotes"]
     
-    # Making our request
-    response = requests.get(URL)
-    data = response.json()
-    return data
+    for r in QUOTES:
+        transactions=[]
+        source_target=str(r)
+        rate=QUOTES[r]
+        amount=input_curr_val*rate
+        str1="SourceTarget: "+source_target
+        str2="Rate: "+str(rate)
+        str3="InputAmount: "+str(input_curr_val)
+        str4="OutputAmount: "+str(amount)
+        str5="LastChanged: "+str(LASTCHANGED)
+        transactions.append(str1)
+        transactions.append(str2)
+        transactions.append(str3)
+        transactions.append(str4)
+        transactions.append(str5)
+        history.append(transactions)
+    
+    print (history)
+    
+    
+    
+    
+    
+def getHistorical():
+    
+    for h in range(0,maxHistory):
+        print ("*"*32)
+        print (history[h])
+    
+    
+    '''
+    historicalURL=baseURL+'historical'
+    currentdate='2018-06-03'
+    currencies= ','.join(output_curr_types) 
+    params={'access_key': yourAPIKey, 'date': currentdate, 'currencies': currencies, 'format': 1}
+    r = requests.get(historicalURL, params = params)
+    historicalquote=r.json()
+    TIMESTAMP=historicalquote["timestamp"]
+    LASTCHANGED=time.ctime(TIMESTAMP)
+    FROM=historicalquote["source"]
+    RESULT=historicalquote["quotes"]
+    '''
+  
+    
+    
+    
 
-def parseJSON(data):
-    TIMESTAMP=data["timestamp"]
-    FROM=data["from"]
-    RESULT=data["result"]
-    RATES=(data["rates"])
-    for curr_type in output_curr_types:
-        for r in RATES:
-            if(r==curr_type):
-                conversion_rate=float(RATES[r])
-                print (conversion_rate*input_curr_val)
-            
-    
-    
+getLiveRates()
+getHistorical()
 
-data=getRealTimeRates(URL)
-parseJSON(data)
+
+
+
