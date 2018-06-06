@@ -50,4 +50,4 @@
 
 4. Run the currencyConverter.py file by the below command in the terminal:
 
-<b>python currencyConverter.py</b>
+   <b>python currencyConverter.py</b>
