@@ -39,3 +39,15 @@
    eg: INR AUD EUR
    
 3. While retrieving the number of historical transactions, the user should enter a number which is less than or equal to the maximum number of transaction history maintained
+
+# HOW TO RUN:
+
+1. Open a terminal
+
+2. Make sure you have python installed in your system 
+
+3. Make sure your python installation path is properly updated so that the application should find python from whichever location it is run
+
+4. Run the currencyConverter.py file by the below command in the terminal:
+
+<b>python currencyConverter.py</b>
