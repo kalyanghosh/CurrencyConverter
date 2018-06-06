@@ -20,14 +20,18 @@
 
 # ASSUMPTIONS:
 1. The user must provide the currency type in UPPER CASE and in ISO 4217 Three Letter Currency Codes
+
      i.e USD for United States Dollars 
 2. For this application the i/p currency type is always United States Dollars i.e USD
 
 
 # INPUT ARGUMENTS FORMAT:
 
-1. Format of input params of performConversion() method : 
+1. Format of input params of performConversion() method :
+
    Enter Input Currency Code,Enter a space,Enter amount
 2. Format of input params of retrieveHistory() method :
+
    Enter 1st Output Currency Code,Enter a space,Enter 2nd Currency Code,...continue entering currency codes
+   
 3. While retrieving the number of historical transactions, the user should enter a number which is less than or equal to the maximum number of transaction history maintained
