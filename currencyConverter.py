@@ -119,7 +119,7 @@ def performConversion():
 def retrieveHistory():
     
     maxHistory=len(history)
-    print ("%d HISTORICAL TRANSACTIONS ARE STORED IN DATABASE"%(maxHistory))
+    print ("%d TOTAL HISTORICAL TRANSACTIONS ARE STORED IN DATABASE"%(maxHistory))
     print ("ENTER THE NUMBER OF HISTORICAL TRANSACTIONS YOU WANT TO RETRIEVE: ")
     hist=int(raw_input())
     
