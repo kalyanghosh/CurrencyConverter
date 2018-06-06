@@ -30,8 +30,12 @@
 1. Format of input params of performConversion() method :
 
    Enter Input Currency Code,Enter a space,Enter amount
+   
+   eg: USD 100
 2. Format of input params of retrieveHistory() method :
 
    Enter 1st Output Currency Code,Enter a space,Enter 2nd Currency Code,...continue entering currency codes
+   
+   eg: INR AUD EUR
    
 3. While retrieving the number of historical transactions, the user should enter a number which is less than or equal to the maximum number of transaction history maintained
